@@ -1,8 +1,11 @@
 import React from "react";
 import {HeartTwoTone} from "@ant-design/icons";
+import {Button, Col, Row} from 'antd';
 import { Anchor } from 'antd';
 
 const { Link } = Anchor;
+
+
 
 function MadeWithLove(){
   return (
