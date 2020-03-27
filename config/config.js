@@ -12,8 +12,8 @@ export default defineConfig({
   antd: {},
   analytics: GA_KEY
     ? {
-      ga: GA_KEY,
-    }
+        ga: GA_KEY,
+      }
     : false,
   dva: {
     hmr: true,
@@ -44,10 +44,9 @@ export default defineConfig({
         {
           path: 'bangladesh',
           name: 'Bangladesh',
-          icon: 'plus-square',
+          icon: 'line-chart',
           component: 'Bangladesh',
         },
-
         {
           component: './404',
         },
@@ -56,7 +55,6 @@ export default defineConfig({
     {
       component: './404',
     },
-
   ],
   theme: {
     // ...darkTheme,

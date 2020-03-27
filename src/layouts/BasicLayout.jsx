@@ -12,6 +12,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getAuthorityFromRouter } from '@/utils/utils';
 import logo from '../assets/logo.svg';
+
 const noMatch = (
   <Result
     status={403}
@@ -36,7 +37,7 @@ const menuDataRender = menuList =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 蚂蚁金服体验技术部出品"
+    copyright="Made with Love from Penguin.com.bd"
     links={[
       {
         key: 'Ant Design Pro',

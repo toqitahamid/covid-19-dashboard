@@ -3,6 +3,7 @@ import {Card, Col, Divider, Empty, Row, Statistic, Typography} from 'antd';
 import {readRemoteFile} from "react-papaparse";
 import useStats from "@/utils/useStats";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
+import {PageHeaderWrapper} from "@ant-design/pro-layout";
 
 const { Text } = Typography;
 
@@ -254,7 +255,7 @@ function Bangladesh() {
   }
 
   return (
-    <div>
+    <PageHeaderWrapper>
 
 
       <Row type='flex' gutter={responsiveGutter}>
@@ -560,7 +561,7 @@ function Bangladesh() {
 
 
       </Row>
-    </div>
+    </PageHeaderWrapper>
   );
 }
 
