@@ -11,7 +11,9 @@ import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getAuthorityFromRouter } from '@/utils/utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
+import MadeWithLove from "@/components/MadeWithLove";
+
 
 const noMatch = (
   <Result
@@ -36,29 +38,7 @@ const menuDataRender = menuList =>
   });
 
 const defaultFooterDom = (
-  <DefaultFooter
-    copyright="Made with Love from Penguin.com.bd"
-    links={[
-      {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
-        blankTarget: true,
-      },
-      {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
-        blankTarget: true,
-      },
-      {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
-        blankTarget: true,
-      },
-    ]}
-  />
+  <MadeWithLove/>
 );
 
 const BasicLayout = props => {

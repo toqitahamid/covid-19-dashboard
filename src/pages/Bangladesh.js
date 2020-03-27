@@ -31,7 +31,6 @@ function Bangladesh() {
       historicalActiveArray = Object.entries(results.data).map(([id, value   ]) => ({
         Date: results.data[id].day, type: 'Active', value: results.data[id].confirmed-results.data[id].recovered - results.data[id].death
       }));
-
       historicalConfirmedArray = Object.entries(results.data).map(([id, value]) => ({
         Date: results.data[id].day, type: 'Confirmed', value: results.data[id].confirmed
       }));
