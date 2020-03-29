@@ -48,6 +48,12 @@ export default defineConfig({
           component: 'Bangladesh',
         },
         {
+          path: 'global',
+          name: 'Global',
+          icon: 'line-chart',
+          component: 'GlobalDashboard',
+        },
+        {
           component: './404',
         },
       ],

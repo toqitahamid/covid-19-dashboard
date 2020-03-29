@@ -60,7 +60,7 @@ function Bangladesh() {
   // const historicalDeaths = historicalStats.timeline.deaths;
   // const historicalDeathsArray = Object.entries(historicalDeaths).map(([value, id]) => ({Date: value, type: 'Confirmed', value: historicalDeaths[value]}));
 
-  //const historicalActiveArray = Object.entries(historicalConfirmed).map(([value, id  ]) => ({Date: value, type: 'Active', value: historicalConfirmed[value]-historicalDeaths[value]-historicalRecovered[value]}));
+  // const historicalActiveArray = Object.entries(historicalConfirmed).map(([value, id  ]) => ({Date: value, type: 'Active', value: historicalConfirmed[value]-historicalDeaths[value]-historicalRecovered[value]}));
 
   const timelineConfirmed = historicalConfirmedArray.filter(function (data, index) {
 
@@ -95,8 +95,8 @@ function Bangladesh() {
   // const todayCases = todayStats.todayCases;
   // const todayDeaths = todayStats.todayDeaths;
   const active = stats.confirmed.value - stats.deaths.value - stats.recovered.value;
+  const arrayLastDate = new Date(historicalConfirmedArray[historicalConfirmedArray.length - 1].Date).getDate();
 
-  let yesterday = new Date(historicalConfirmedArray[historicalConfirmedArray.length - 1].Date).getDate()
   let todayConfirmedNew = 0;
   let todayRecoveredNew = 0;
   let todayDeathsNew = 0;
@@ -122,7 +122,12 @@ function Bangladesh() {
   let lastThirtyDayDeaths = 0;
   let lastThirtyDayActive = 0;
 
-  if ((todayDate - yesterday) === 1){
+  let tempConfirmedData = 0;
+  let tempRecoveredData = 0;
+  let tempDeathsData = 0;
+  let tempActiveData = 0;
+
+  if (todayDate > arrayLastDate){
     todayConfirmedNew = stats.confirmed.value - historicalConfirmedArray[historicalConfirmedArray.length - 1].value;
     todayRecoveredNew = stats.recovered.value - historicalRecoveredArray[historicalConfirmedArray.length - 1].value;
     todayDeathsNew = stats.deaths.value - historicalDeathsArray[historicalConfirmedArray.length - 1].value;
@@ -133,31 +138,29 @@ function Bangladesh() {
     yesterdayDeaths = historicalDeathsArray[historicalConfirmedArray.length - 1].value - historicalDeathsArray[historicalConfirmedArray.length - 2].value;
     yesterdayActive = historicalActiveArray[historicalConfirmedArray.length - 1].value - historicalActiveArray[historicalConfirmedArray.length - 2].value;
 
-    let arraySize = historicalConfirmedArray.length - 1 ;
+    const arraySize = historicalConfirmedArray.length - 1 ;
     let startIndex = historicalConfirmedArray.length - 3 ;
 
-
-    /*Last 3 Days*/
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    /* Last 3 Days */
+    for (let x = startIndex; x <= arraySize; x++)   {
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
       lastThreeDayConfirmed  += tempConfirmedData;
       lastThreeDayRecovered += tempRecoveredData;
       lastThreeDayDeaths += tempDeathsData;
       lastThreeDayActive += + tempActiveData;
     }
-    startIndex = historicalConfirmedArray.length - 8;
 
-
+    startIndex = historicalConfirmedArray.length - 7;
     /*Last 7 Days*/
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    for (let x = startIndex; x <= arraySize; x++)   {
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
 
       lastSevenDayConfirmed  += tempConfirmedData;
@@ -165,15 +168,14 @@ function Bangladesh() {
       lastSevenDayDeaths += tempDeathsData;
       lastSevenDayActive += + tempActiveData;
     }
-    startIndex = historicalConfirmedArray.length - 31;
 
-
-    /*Last 30 Days*/
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    startIndex = historicalConfirmedArray.length - 30;
+    /* Last 30 Days */
+    for (let x = startIndex; x <= arraySize; x++)   {
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
 
       lastThirtyDayConfirmed  += tempConfirmedData;
@@ -186,8 +188,7 @@ function Bangladesh() {
 
 
   }
-  /*possible error in month change. 1st day of the month and last day of the month*/
-  else if ((todayDate - yesterday) === 2){
+  else{
     todayConfirmedNew = '0';
     todayRecoveredNew = '0';
     todayDeathsNew = '0';
@@ -198,16 +199,16 @@ function Bangladesh() {
     yesterdayDeaths = historicalDeathsArray[historicalConfirmedArray.length - 2].value - historicalDeathsArray[historicalConfirmedArray.length - 3].value;
     yesterdayActive = historicalActiveArray[historicalConfirmedArray.length - 2].value - historicalActiveArray[historicalConfirmedArray.length - 3].value;
 
-    let arraySize = historicalConfirmedArray.length - 1 ;
-    let startIndex = historicalConfirmedArray.length - 3 ;
+    const arraySize = historicalConfirmedArray.length - 2 ;
 
 
-    /*Last 3 Days*/
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    /* Last 3 Days */
+    let startIndex = historicalConfirmedArray.length - 4;
+    for (let x = startIndex; x < arraySize; x++){
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
       lastThreeDayConfirmed  += tempConfirmedData;
       lastThreeDayRecovered += tempRecoveredData;
@@ -215,17 +216,14 @@ function Bangladesh() {
       lastThreeDayActive += + tempActiveData;
     }
 
+    /* Last 7 Days */
 
     startIndex = historicalConfirmedArray.length - 8;
-
-
-    /*Last 7 Days*/
-
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    for (let x = startIndex; x < arraySize; x++){
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
 
       lastSevenDayConfirmed  += tempConfirmedData;
@@ -234,13 +232,14 @@ function Bangladesh() {
       lastSevenDayActive += + tempActiveData;
 
     }
-    /*Last 30 Days*/
 
-    for (let x = startIndex; x < arraySize; x++)   {
-      let tempConfirmedData = parseInt(historicalConfirmedArray[x+1].value) - parseInt(historicalConfirmedArray[x].value);
-      let tempRecoveredData = parseInt(historicalRecoveredArray[x+1].value) - parseInt(historicalRecoveredArray[x].value);
-      let tempDeathsData = parseInt(historicalDeathsArray[x+1].value) - parseInt(historicalDeathsArray[x].value);
-      let tempActiveData = parseInt(historicalActiveArray[x+1].value) - parseInt(historicalActiveArray[x].value);
+    /* Last 30 Days */
+    startIndex = historicalConfirmedArray.length - 31;
+    for (let x = startIndex; x < arraySize; x++){
+      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
+      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
+      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
+      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
 
 
       lastThirtyDayConfirmed  += tempConfirmedData;
@@ -394,11 +393,9 @@ function Bangladesh() {
               </Col>
 
             </Row>
-
-
-
-
           </Card>
+
+
         </Col>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
@@ -550,12 +547,10 @@ function Bangladesh() {
               <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
                 <Text strong style={{fontSize: 14}}>{lastThirtyDayDeaths}</Text>
               </Col>
-
-
             </Row>
-
-
           </Card>
+
+
         </Col>
 
 

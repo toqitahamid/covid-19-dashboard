@@ -50,5 +50,6 @@ export default {
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
   'menu.Bangladesh': 'Bangladesh',
+  'menu.Global': 'Global',
 
 };
