@@ -7,7 +7,7 @@ const { winPath } = utils; // preview.pro.ant.design only do not use in your pro
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 const GA_KEY = true;
 
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, REACT_APP_ENV } = process.env;
+const {  REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
@@ -99,7 +99,7 @@ export default defineConfig({
             .split('/')
             .map(a => a.replace(/([A-Z])/g, '-$1'))
             .map(a => a.toLowerCase());
-          return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
+          return `penguin-research-wing${arr.join('-')}-${localName}`.replace(/--/g, '-');
         }
 
         return localName;
