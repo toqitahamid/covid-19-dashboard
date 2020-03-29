@@ -12,7 +12,7 @@ export default defineConfig({
   antd: {},
   analytics: GA_KEY
     ? {
-        ga: GA_KEY,
+        ga: 'UA-110966322-2',
       }
     : false,
   dva: {

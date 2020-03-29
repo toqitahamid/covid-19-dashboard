@@ -143,10 +143,10 @@ function Bangladesh() {
 
     /* Last 3 Days */
     for (let x = startIndex; x <= arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(historicalConfirmedArray[x].value) - parseInt(historicalConfirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(historicalRecoveredArray[x].value) - parseInt(historicalRecoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(historicalDeathsArray[x].value) - parseInt(historicalDeathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(historicalActiveArray[x].value) - parseInt(historicalActiveArray[x-1].value));
+      tempConfirmedData = Math.abs(historicalConfirmedArray[x].value - historicalConfirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(historicalRecoveredArray[x].value - historicalRecoveredArray[x-1].value);
+      tempDeathsData = Math.abs(historicalDeathsArray[x].value - historicalDeathsArray[x-1].value);
+      tempActiveData = Math.abs(historicalActiveArray[x].value - historicalActiveArray[x-1].value);
 
       lastThreeDayConfirmed  += tempConfirmedData;
       lastThreeDayRecovered += tempRecoveredData;
