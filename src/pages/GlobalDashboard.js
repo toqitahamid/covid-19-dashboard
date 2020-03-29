@@ -6,13 +6,14 @@ import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import {
   getDatewiseDate,
   getLastSevenDaysData, getLastThirtyDaysData, getLastThreeDaysData,
-  getLatestData,
+  getLatestData, getLatestGlobalData,
   getTodayData,
   getYesterdayData
 } from "@/utils/globalDataParser/getData";
 import RecoveredCard from "@/components/Cards/RecoveredCard";
 import ActiveCard from "@/components/Cards/ActiveCard";
 import DeathsCard from "@/components/Cards/DeathsCard";
+import GlobalTableCard from "@/components/Cards/GlobalTableCard";
 // import GlobalSummaryDonutChart from "./global/GlobalSummaryDonutChart";
 // import LineChart from "@/components/Graph/LineChart";
 
@@ -28,10 +29,22 @@ function GlobalDashboard() {
   const globalDatewiseCountUrl = 'https://covidapi.info/api/v1/global/count';
   const {stats: globalDatewiseCountData, loading: globalDatewiseCountLoading, error: globalDatewiseCountError} = useStats(globalDatewiseCountUrl);
 
+  // https://covidapi.info/api/v1/global/latest
+  const globalLatestDataCountUrl = 'https://covidapi.info/api/v1/global/latest';
+  const {stats: globalLatestDataCount, loading: globalLatestDataCountLoading, error: globalLatestDataCountError} = useStats(globalLatestDataCountUrl);
 
-  if (latestLoading || globalDatewiseCountLoading) return <Card active='true' loading='true'/>;
-  if (!latestData || !globalDatewiseCountData) return <Card active='true' loading='true'/>;
-  if (latestError || globalDatewiseCountError) return <Empty/>;
+
+  if (latestLoading || globalDatewiseCountLoading || globalLatestDataCountLoading) return <Card active='true' loading='true'/>;
+  if (!latestData || !globalDatewiseCountData || !globalLatestDataCount) return <Card active='true' loading='true'/>;
+  if (latestError || globalDatewiseCountError || globalLatestDataCountError) return <Empty/>;
+
+
+  const globalLatestDataTotal =  getLatestGlobalData(globalLatestDataCount);
+
+
+
+
+
 
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
 
@@ -116,6 +129,16 @@ function GlobalDashboard() {
 
 
       </Row>
+
+      <Row type='flex' >
+
+        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+          <GlobalTableCard data={globalLatestDataTotal}/>
+        </Col>
+
+      </Row>
+
+
     </PageHeaderWrapper>
 
 

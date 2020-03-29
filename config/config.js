@@ -60,6 +60,12 @@ export default defineConfig({
           icon: 'global',
           component: 'GlobalDashboard',
         },
+        // {
+        //   path: 'select-country',
+        //   name: 'Select Country',
+        //   icon: 'global',
+        //   component: 'CountrySelector',
+        // },
         {
           component: './404',
         },

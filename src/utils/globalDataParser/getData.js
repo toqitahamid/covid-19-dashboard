@@ -1,3 +1,48 @@
+const countries = require("i18n-iso-countries");
+countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+
+function flattenArray(data) {
+  // our initial value this time is a blank array
+  const initialValue = [];
+
+  // call reduce on our data
+  return data.reduce((total, value) => {
+    // if the value is an array then recursively call reduce
+    // if the value is not an array then just concat our value
+    return total.concat(Array.isArray(value) ? flattenArray(value) : value);
+  }, initialValue);
+}
+
+
+function getLatestGlobalData(data) {
+  //
+  // const latestData = flattenArray(data.result);
+  //
+  // const tempData = Object.entries(latestData).map(([key, value ]) => ({
+  //       country: latestData[key], confirmed: latestData[key].confirmed, deaths: latestData[key].deaths, recovered: latestData[key].recovered
+  //     }));
+  // console.log(tempData);
+
+  function onlyUnique(value, index, self) {
+    return value.country !== undefined;
+  }
+
+  let latestData = [];
+  const arraySize = data.result.length -1;
+  for (let x = 0; x <= arraySize; x++) {
+    const tempData = Object.entries(data.result[x]).map(([value, id ]) => ({
+      key: x, country: countries.getName(value, "en"), confirmed: id.confirmed, confirmed_key: `${value}-confirmed-${x}`,
+      deaths: id.deaths, recovered: id.recovered,
+    }));
+    latestData.push(...tempData);
+  }
+
+  latestData = latestData.filter(onlyUnique);
+
+  //console.log(latestData);
+  return latestData;
+
+}
 
 
 function getLatestData(data) {
@@ -314,4 +359,4 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
 }
 
 
-export {getLatestData, getDatewiseDate, getTodayData, getYesterdayData, getLastThreeDaysData, getLastSevenDaysData, getLastThirtyDaysData};
+export {getLatestData, getDatewiseDate, getTodayData, getYesterdayData, getLastThreeDaysData, getLastSevenDaysData, getLastThirtyDaysData, getLatestGlobalData};

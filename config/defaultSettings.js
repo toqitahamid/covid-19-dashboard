@@ -11,7 +11,7 @@ export default {
   menu: {
     locale: false,
   },
-  // title: 'COVID-19',
+  title: 'COVID-19',
   pwa: false,
   iconfontUrl: '',
 };
