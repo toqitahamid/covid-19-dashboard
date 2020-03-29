@@ -49,13 +49,13 @@ export default defineConfig({
         {
           path: 'bangladesh',
           name: 'Bangladesh',
-          icon: 'line-chart',
+          icon: 'area-chart',
           component: 'Bangladesh',
         },
         {
           path: 'global',
           name: 'Global',
-          icon: 'line-chart',
+          icon: 'global',
           component: 'GlobalDashboard',
         },
         {
