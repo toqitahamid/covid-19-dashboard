@@ -4,10 +4,6 @@ import {readRemoteFile} from "react-papaparse";
 import useStats from "@/utils/useStats";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
 import {PageHeaderWrapper} from "@ant-design/pro-layout";
-import LogRocket from 'logrocket';
-
-LogRocket.init('ti0gyn/corona-bd');
-
 
 const { Text } = Typography;
 
