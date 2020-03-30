@@ -1,5 +1,9 @@
-import {Card, Table} from 'antd';
+import {Card, Divider, Table, Typography} from 'antd';
 import React from "react";
+import ReactCountryFlag from "react-country-flag"
+
+
+const { Text, Title } = Typography;
 
 function GlobalTableCard({data}) {
 
@@ -7,13 +11,23 @@ function GlobalTableCard({data}) {
     return (b.confirmed - a.confirmed);
 
   })
-
+  // countries.getAlpha2Code('United States of America', 'en'))
   const columns = [
+    {
+      dataIndex: 'country_code',
+      key: 'key',
+      width: 25,
+      colSpan: 0,
+      fixed: 'left',
+      render:  text => <ReactCountryFlag countryCode={text} svg/>
+
+    },
     {
       title: 'Country',
       dataIndex: 'country',
       key: 'key',
-      //width: 180,
+      // width: 180,
+      colSpan: 2,
       ellipsis: true,
       fixed: 'left',
       textWrap: 'word-break',
@@ -25,7 +39,7 @@ function GlobalTableCard({data}) {
       key: 'key',
       // sorter: (a, b) => a.confirmed - b.confirmed,
       // sortDirections: ['descend', 'ascend'],
-      //sortOrder: 'descend',
+      // sortOrder: 'descend',
       align: 'right'
     },
     {
@@ -50,7 +64,8 @@ function GlobalTableCard({data}) {
   return(
 
     <Card>
-      <Table dataSource={data} columns={columns} size="small" title={() => 'Statistics'} scroll={{ x: 500, y: 500 }}  tableLayout="fixed" pagination={false}/>
+      <Title level={4}>Statistics</Title>
+      <Table dataSource={data} columns={columns} size="small" scroll={{ x: 500, y: 500 }}  tableLayout="fixed" pagination={false}/>
     </Card>
 
 

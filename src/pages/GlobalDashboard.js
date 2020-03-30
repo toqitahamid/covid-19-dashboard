@@ -1,6 +1,6 @@
 import React from "react";
 import useStats from "../utils/useStats";
-import {Card, Col, Empty, Row, Typography} from 'antd';
+import {Card, Col, Empty, Row, Table, Typography} from 'antd';
 import {PageHeaderWrapper} from "@ant-design/pro-layout";
 import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import {
@@ -19,7 +19,7 @@ import GlobalTableCard from "@/components/Cards/GlobalTableCard";
 
 
 const responsiveGutter = [{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}];
-
+const { Text } = Typography;
 
 function GlobalDashboard() {
 
@@ -40,11 +40,6 @@ function GlobalDashboard() {
 
 
   const globalLatestDataTotal =  getLatestGlobalData(globalLatestDataCount);
-
-
-
-
-
 
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
 
@@ -133,6 +128,7 @@ function GlobalDashboard() {
       <Row type='flex' >
 
         <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+
           <GlobalTableCard data={globalLatestDataTotal}/>
         </Col>
 

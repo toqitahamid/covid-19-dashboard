@@ -31,8 +31,8 @@ function getLatestGlobalData(data) {
   const arraySize = data.result.length -1;
   for (let x = 0; x <= arraySize; x++) {
     const tempData = Object.entries(data.result[x]).map(([value, id ]) => ({
-      key: x, country: countries.getName(value, "en"), confirmed: id.confirmed, confirmed_key: `${value}-confirmed-${x}`,
-      deaths: id.deaths, recovered: id.recovered,
+      key: x, country: countries.getName(value, "en"), confirmed: id.confirmed,
+      deaths: id.deaths, recovered: id.recovered, country_code: countries.alpha3ToAlpha2(value)
     }));
     latestData.push(...tempData);
   }
