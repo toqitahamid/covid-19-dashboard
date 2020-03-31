@@ -4,7 +4,8 @@ import {Card, Col, Empty, Row, Table, Typography} from 'antd';
 import {PageHeaderWrapper} from "@ant-design/pro-layout";
 import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import {
-  getDatewiseDate,
+  getDailyCaseData,
+  getDatewiseData,
   getLastSevenDaysData, getLastThirtyDaysData, getLastThreeDaysData,
   getLatestData, getLatestGlobalData,
   getTodayData,
@@ -14,6 +15,7 @@ import RecoveredCard from "@/components/Cards/RecoveredCard";
 import ActiveCard from "@/components/Cards/ActiveCard";
 import DeathsCard from "@/components/Cards/DeathsCard";
 import GlobalTableCard from "@/components/Cards/GlobalTableCard";
+import GlobalDailyCard from "@/components/Cards/GlobalDailyCard";
 // import GlobalSummaryDonutChart from "./global/GlobalSummaryDonutChart";
 // import LineChart from "@/components/Graph/LineChart";
 
@@ -43,9 +45,15 @@ function GlobalDashboard() {
 
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
 
-  const {confirmed: confirmedArray, recovered: recoveredArray, deaths: deathsArray, active: activeArray} = getDatewiseDate(globalDatewiseCountData);
+  const {confirmed: confirmedTotalArray, recovered: recoveredTotalArray, deaths: deathsTotalArray, active: activeTotalArray} = getDatewiseData(globalDatewiseCountData);
+
+  const dailyTotalCaseData = {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray};
+
+  const {latestData: dailyCaseData} = getDailyCaseData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
 
+
+  //console.log(dailyCaseData);
 
   const {
     todayConfirmed,
@@ -57,10 +65,10 @@ function GlobalDashboard() {
     latestRecovered,
     latestDeaths,
     latestActive,
-    confirmedArray,
-    recoveredArray,
-    deathsArray,
-    activeArray
+    confirmedTotalArray,
+    recoveredTotalArray,
+    deathsTotalArray,
+    activeTotalArray
   );
 
   const {
@@ -68,7 +76,7 @@ function GlobalDashboard() {
     yesterdayRecovered,
     yesterdayDeaths,
     yesterdayActive
-  } = getYesterdayData(confirmedArray, recoveredArray, deathsArray, activeArray);
+  } = getYesterdayData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
   const {
     lastThreeDayConfirmed,
@@ -76,7 +84,7 @@ function GlobalDashboard() {
     lastThreeDayDeaths,
     lastThreeDayActive
 
-  } = getLastThreeDaysData(confirmedArray, recoveredArray, deathsArray, activeArray);
+  } = getLastThreeDaysData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
   const {
     lastSevenDayConfirmed,
@@ -84,54 +92,61 @@ function GlobalDashboard() {
     lastSevenDayDeaths,
     lastSevenDayActive
 
-  } = getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activeArray);
+  } = getLastSevenDaysData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
   const {
     lastThirtyDayConfirmed,
     lastThirtyDayRecovered,
     lastThirtyDayDeaths,
     lastThirtyDayActive
-  } = getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, activeArray);
+  } = getLastThirtyDaysData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
-  const confirmedData = {latestConfirmed, confirmedArray, todayConfirmed, yesterdayConfirmed, lastThreeDayConfirmed, lastSevenDayConfirmed, lastThirtyDayConfirmed};
+  const confirmedCardData = {latestConfirmed, confirmedArray: confirmedTotalArray, todayConfirmed, yesterdayConfirmed, lastThreeDayConfirmed, lastSevenDayConfirmed, lastThirtyDayConfirmed};
 
-  const recoveredData =  {latestRecovered, latestConfirmed, recoveredArray, todayRecovered, yesterdayRecovered, lastThreeDayRecovered, lastSevenDayRecovered, lastThirtyDayRecovered};
+  const recoveredCardData =  {latestRecovered, latestConfirmed, recoveredArray: recoveredTotalArray, todayRecovered, yesterdayRecovered, lastThreeDayRecovered, lastSevenDayRecovered, lastThirtyDayRecovered};
 
-  const activeData = {latestActive, activeArray, todayActive, yesterdayActive, lastThreeDayActive, lastSevenDayActive, lastThirtyDayActive};
+  const activeCardData = {latestActive, activeArray: activeTotalArray, todayActive, yesterdayActive, lastThreeDayActive, lastSevenDayActive, lastThirtyDayActive};
 
-  const deathsData = {latestDeaths, latestConfirmed, deathsArray, todayDeaths, yesterdayDeaths, lastThreeDayDeaths, lastSevenDayDeaths, lastThirtyDayDeaths};
+  const deathsCardData = {latestDeaths, latestConfirmed, deathsArray: deathsTotalArray, todayDeaths, yesterdayDeaths, lastThreeDayDeaths, lastSevenDayDeaths, lastThirtyDayDeaths};
 
   return (
     <PageHeaderWrapper>
       <Row type='flex' gutter={responsiveGutter}>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
-          <ConfirmedCard data={confirmedData}/>
+          <ConfirmedCard data={confirmedCardData}/>
         </Col>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
-          <ActiveCard data={activeData}/>
+          <ActiveCard data={activeCardData}/>
         </Col>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
-          <RecoveredCard data={recoveredData}/>
+          <RecoveredCard data={recoveredCardData}/>
         </Col>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
-          <DeathsCard data={deathsData}/>
+          <DeathsCard data={deathsCardData}/>
         </Col>
 
 
 
       </Row>
 
-      <Row type='flex' >
+      <Row type='flex' gutter={responsiveGutter} >
 
-        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
 
           <GlobalTableCard data={globalLatestDataTotal}/>
         </Col>
 
+      </Row>
+
+
+      <Row type='flex' gutter={responsiveGutter}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+          <GlobalDailyCard dailyTotalCaseData={dailyTotalCaseData} dailyCaseData={dailyCaseData}/>
+        </Col>
       </Row>
 
 

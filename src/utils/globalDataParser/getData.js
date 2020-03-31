@@ -61,7 +61,46 @@ function getLatestData(data) {
 
 }
 
-function getDatewiseDate(data) {
+
+function getDailyCaseData(confirmedArray, recoveredArray, deathsArray, activeArray) {
+
+
+  const arraySize = confirmedArray.length -1;
+
+  const latestData = []
+
+  for (let x = 1; x <= arraySize; x++) {
+    const tempData = {Date: confirmedArray[x].Date, type: confirmedArray[x].type ,value: confirmedArray[x].value - confirmedArray[x-1].value};
+    latestData.push(tempData);
+  }
+
+  for (let x = 1; x <= arraySize; x++) {
+    const tempData = {Date: recoveredArray[x].Date, type: recoveredArray[x].type ,value: recoveredArray[x].value - recoveredArray[x-1].value};
+    latestData.push(tempData);
+  }
+
+  for (let x = 1; x <= arraySize; x++) {
+    const tempData = {Date: deathsArray[x].Date, type: deathsArray[x].type ,value: deathsArray[x].value - deathsArray[x-1].value};
+    latestData.push(tempData);
+  }
+  //
+  // for (let x = 1; x <= arraySize; x++) {
+  //   const tempData = {Date: activeArray[x].Date, type: activeArray[x].type ,value: activeArray[x].value - activeArray[x-1].value};
+  //   latestData.push(tempData);
+  // }
+
+  //console.log(latestData);
+
+
+
+
+  return {
+    latestData
+  }
+
+}
+
+function getDatewiseData(data) {
 
 
 
@@ -359,4 +398,5 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
 }
 
 
-export {getLatestData, getDatewiseDate, getTodayData, getYesterdayData, getLastThreeDaysData, getLastSevenDaysData, getLastThirtyDaysData, getLatestGlobalData};
+export {getLatestData, getDatewiseData, getTodayData, getYesterdayData, getLastThreeDaysData,
+  getLastSevenDaysData, getLastThirtyDaysData, getLatestGlobalData, getDailyCaseData};
