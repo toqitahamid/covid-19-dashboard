@@ -12,9 +12,6 @@ function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
 
   // console.log(dailyCaseData);
   const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deathsTotalArray, ...activeTotalArray];
-  //console.log(dataMerged);
-
-  // console.log(dataTotalMerged);
 
   return (
 
@@ -28,16 +25,12 @@ function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
 
       <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
         <Card>
-          <GlobalStackedAreaChart data={dailyCaseData} title="Total daily cases (worldwide)"/>
+          <GlobalStackedAreaChart data={dailyCaseData} title="Daily cases (worldwide)"/>
         </Card>
       </Col>
 
 
     </Row>
-
-
-
-
 
 
   );

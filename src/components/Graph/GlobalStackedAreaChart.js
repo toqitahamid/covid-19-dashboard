@@ -18,7 +18,9 @@ function GlobalStackedAreaChart({data, title}) {
         visible: true,
         text: title,
       },
-      padding: false,
+      // padding: [20, 10, 30, 30],
+      padding: true,
+      // forceFit: true,
       data,
       meta: {
 
@@ -34,6 +36,7 @@ function GlobalStackedAreaChart({data, title}) {
       xAxis: {
         type: 'dateTime',
         mask: 'DD-MM-YYYY',
+        // nice: true,
         label: {
           // 数值格式化为千分位
           formatter: (v) => {
@@ -64,17 +67,30 @@ function GlobalStackedAreaChart({data, title}) {
 
           visible: true,
           autoRotate: false,
-          autoHide: true
+          // autoHide: true
 
         },
       },
+      yAxis: {
+        nice: true,
+      },
+      axis: {
+        constraint:{
+          name: 'elementDist',
+          option:{
+            value: 4,
+          },
+        },
+      },
+
+
       // yAxis: {
       //   label: {
       //     // 数值格式化为千分位
       //     formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
       //   },
       // },
-      responsive: true,
+      // responsive: true,
     });
 
     plot.render();
