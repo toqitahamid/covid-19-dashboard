@@ -1,10 +1,9 @@
 import React, {useEffect, useRef} from "react";
-import { StackedArea, Line } from '@antv/g2plot';
-import {Card} from "antd";
+import {Scatter} from '@antv/g2plot';
 import abbreviateNumber from "@/utils/graph/abbreviateNumber";
 
 
-function GlobalStackedAreaChart({data, title}) {
+function GlobalScatterChart({data, title, label_title}) {
 
   const container = useRef(null);
 
@@ -13,25 +12,25 @@ function GlobalStackedAreaChart({data, title}) {
       return;
     }
 
-    const plot = new Line(container.current, {
+    const plot = new Scatter(container.current, {
       title: {
         visible: true,
         text: title,
       },
-      // padding: [20, 10, 30, 30],
-      padding: true,
+      padding: [60, 10, 30, 40],
+      // padding: true,
       // forceFit: true,
       data,
       meta: {
-
         value: {
-
+          alias: label_title,
           formatter:(v)=>{return abbreviateNumber(v)}
         }
       },
       xField: 'Date',
       yField: 'value',
-      seriesField: 'type',
+
+      // seriesField: 'type',
       // color: ['#6897a7', '#8bc0d6', '#60d7a7', '#dedede', '#fedca9', '#fab36f', '#d96d6f'],
       xAxis: {
         type: 'dateTime',
@@ -44,7 +43,7 @@ function GlobalStackedAreaChart({data, title}) {
             const date = dataString.getDate();
             const numMonth = dataString.getMonth();
 
-            var months = {
+            const months = {
               '0' : 'Jan',
               '1' : 'Feb',
               '2' : 'Mar',
@@ -59,38 +58,25 @@ function GlobalStackedAreaChart({data, title}) {
               '11' : 'Dec'
             };
             const month = months[numMonth];
-            const formattedDate = `${date}-${month}`;
-
-            return formattedDate;
-
+            return `${date}-${month}`;
           },
 
           visible: true,
           autoRotate: false,
           // autoHide: true
-
         },
       },
       yAxis: {
         nice: true,
       },
-      axis: {
-        constraint:{
-          name: 'elementDist',
-          option:{
-            value: 4,
-          },
-        },
+      legend: {
+        position: 'top-left',
+        style: {
+          paddingBottom: '10px',
+        }
       },
 
 
-      // yAxis: {
-      //   label: {
-      //     // 数值格式化为千分位
-      //     formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
-      //   },
-      // },
-      // responsive: true,
     });
 
     plot.render();
@@ -105,4 +91,4 @@ function GlobalStackedAreaChart({data, title}) {
 }
 
 
-export default GlobalStackedAreaChart;
+export default GlobalScatterChart;

@@ -1,6 +1,7 @@
 const countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function flattenArray(data) {
   // our initial value this time is a blank array
   const initialValue = [];
@@ -23,12 +24,14 @@ function getLatestGlobalData(data) {
   //     }));
   // console.log(tempData);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onlyUnique(value, index, self) {
     return value.country !== undefined;
   }
 
   let latestData = [];
   const arraySize = data.result.length -1;
+  // eslint-disable-next-line no-plusplus
   for (let x = 0; x <= arraySize; x++) {
     const tempData = Object.entries(data.result[x]).map(([value, id ]) => ({
       key: x, country: countries.getName(value, "en"), confirmed: id.confirmed,
@@ -38,8 +41,6 @@ function getLatestGlobalData(data) {
   }
 
   latestData = latestData.filter(onlyUnique);
-
-  //console.log(latestData);
   return latestData;
 
 }
@@ -64,59 +65,65 @@ function getLatestData(data) {
 
 function getDailyCaseData(confirmedArray, recoveredArray, deathsArray, activeArray) {
 
-
   const arraySize = confirmedArray.length -1;
 
-  const latestData = []
+  const confirmedDailyArray = [];
+  const recoveredDailyArray = [];
+  const deathsDailyArray = [];
+  const activeDailyArray = [];
 
+  // eslint-disable-next-line no-plusplus
   for (let x = 1; x <= arraySize; x++) {
     const tempData = {Date: confirmedArray[x].Date, type: confirmedArray[x].type ,value: confirmedArray[x].value - confirmedArray[x-1].value};
-    latestData.push(tempData);
+    confirmedDailyArray.push(tempData);
   }
 
+  // eslint-disable-next-line no-plusplus
   for (let x = 1; x <= arraySize; x++) {
     const tempData = {Date: recoveredArray[x].Date, type: recoveredArray[x].type ,value: recoveredArray[x].value - recoveredArray[x-1].value};
-    latestData.push(tempData);
+    recoveredDailyArray.push(tempData);
   }
 
+  // eslint-disable-next-line no-plusplus
   for (let x = 1; x <= arraySize; x++) {
     const tempData = {Date: deathsArray[x].Date, type: deathsArray[x].type ,value: deathsArray[x].value - deathsArray[x-1].value};
-    latestData.push(tempData);
+    deathsDailyArray.push(tempData);
   }
-  //
-  // for (let x = 1; x <= arraySize; x++) {
-  //   const tempData = {Date: activeArray[x].Date, type: activeArray[x].type ,value: activeArray[x].value - activeArray[x-1].value};
-  //   latestData.push(tempData);
-  // }
-
-  //console.log(latestData);
 
 
-
+  // eslint-disable-next-line no-plusplus
+  for (let x = 1; x <= arraySize; x++) {
+    const tempData = {Date: activeArray[x].Date, type: activeArray[x].type ,value: activeArray[x].value - activeArray[x-1].value};
+    activeDailyArray.push(tempData);
+  }
 
   return {
-    latestData
+    confirmedDailyArray,
+    recoveredDailyArray,
+    deathsDailyArray,
+    activeDailyArray,
   }
 
 }
 
+
+
+
 function getDatewiseData(data) {
 
-
-
-  const confirmed = Object.entries(data.result).map(([value, id ]) => ({
+  const confirmed = Object.entries(data.result).map(([value ]) => ({
     Date: value, type: 'Confirmed', value: data.result[value].confirmed
   }));
 
-  const recovered = Object.entries(data.result).map(([value, id ]) => ({
+  const recovered = Object.entries(data.result).map(([value]) => ({
     Date: value, type: 'Recovered', value: data.result[value].recovered
   }));
 
-  const deaths = Object.entries(data.result).map(([value, id ]) => ({
+  const deaths = Object.entries(data.result).map(([value ]) => ({
     Date: value, type: 'Death', value: data.result[value].deaths
   }));
 
-  const active = Object.entries(data.result).map(([ value, id   ]) => ({
+  const active = Object.entries(data.result).map(([ value  ]) => ({
     Date: value, type: 'Active', value: data.result[value].confirmed - data.result[value].recovered - data.result[value].deaths
   }));
 
@@ -227,11 +234,12 @@ function getLastThreeDaysData(confirmedArray, recoveredArray, deathsArray, activ
     const arraySize = confirmedArray.length - 1 ;
     const startIndex = confirmedArray.length - 3 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x <= arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastThreeDayConfirmed  += tempConfirmedData;
       lastThreeDayRecovered += tempRecoveredData;
@@ -246,11 +254,12 @@ function getLastThreeDaysData(confirmedArray, recoveredArray, deathsArray, activ
     const arraySize = confirmedArray.length - 2 ;
     const startIndex = confirmedArray.length - 4 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x <= arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastThreeDayConfirmed  += tempConfirmedData;
       lastThreeDayRecovered += tempRecoveredData;
@@ -290,11 +299,12 @@ function getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activ
     const arraySize = confirmedArray.length - 1 ;
     const startIndex = confirmedArray.length - 7 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x <= arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastSevenDayConfirmed  += tempConfirmedData;
       lastSevenDayRecovered += tempRecoveredData;
@@ -309,11 +319,12 @@ function getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activ
     const arraySize = confirmedArray.length - 2 ;
     const startIndex = confirmedArray.length - 8 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x <= arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastSevenDayConfirmed  += tempConfirmedData;
       lastSevenDayRecovered += tempRecoveredData;
@@ -355,11 +366,12 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
     const arraySize = confirmedArray.length - 1 ;
     const startIndex = confirmedArray.length - 30 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x < arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastThirtyDayConfirmed  += tempConfirmedData;
       lastThirtyDayRecovered += tempRecoveredData;
@@ -374,11 +386,12 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
     const arraySize = confirmedArray.length - 2 ;
     const startIndex = confirmedArray.length - 31 ;
 
+    // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x < arraySize; x++)   {
-      tempConfirmedData = Math.abs(parseInt(confirmedArray[x].value) - parseInt(confirmedArray[x-1].value));
-      tempRecoveredData = Math.abs(parseInt(recoveredArray[x].value) - parseInt(recoveredArray[x-1].value));
-      tempDeathsData = Math.abs(parseInt(deathsArray[x].value) - parseInt(deathsArray[x-1].value));
-      tempActiveData = Math.abs(parseInt(activeArray[x].value) - parseInt(activeArray[x-1].value));
+      tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
+      tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
+      tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
+      tempActiveData = Math.abs(activeArray[x].value - activeArray[x-1].value);
 
       lastThirtyDayConfirmed  += tempConfirmedData;
       lastThirtyDayRecovered += tempRecoveredData;
