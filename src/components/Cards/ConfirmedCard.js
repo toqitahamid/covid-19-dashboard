@@ -29,7 +29,7 @@ function ConfirmedCard({data}) {
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={confirmedArray} color="orange"/>
+          <CardAreaChart data={confirmedArray} color="orange" tooltipAlias='Confirmed'/>
         </Col>
 
       </Row>

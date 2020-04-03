@@ -1,7 +1,7 @@
 import {Area} from '@antv/g2plot';
 import React, {useEffect, useRef} from 'react';
 
-function CardAreaChart({data, color}) {
+function CardAreaChart({data, color, tooltipAlias}) {
 
   const container = useRef(null);
 
@@ -13,7 +13,6 @@ function CardAreaChart({data, color}) {
     const areaPlot = new Area(container.current, {
       title: {
         visible: false,
-        text: '基础面积图',
       },
       height: 100,
       forceFit: true,
@@ -22,7 +21,7 @@ function CardAreaChart({data, color}) {
       xField: 'Date',
       yField: 'value',
       smooth: true,
-      color: color,
+      color,
       xAxis:{
         label: {
           visible: false,
@@ -37,6 +36,11 @@ function CardAreaChart({data, color}) {
         },
         grid: {
           visible: false,
+        },
+      },
+      meta: {
+        value: {
+          alias: tooltipAlias,
         },
       },
     });

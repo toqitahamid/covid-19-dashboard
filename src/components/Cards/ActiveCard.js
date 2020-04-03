@@ -23,7 +23,7 @@ function ActiveCard({data}) {
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={activeArray} color={'grey'}/>
+          <CardAreaChart data={activeArray} color={'grey'} tooltipAlias='Active'/>
         </Col>
 
       </Row>

@@ -37,7 +37,7 @@ function RecoveredCard({data}) {
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={recoveredArray} color="green"/>
+          <CardAreaChart data={recoveredArray} color="green" tooltipAlias='Recovered'/>
         </Col>
 
       </Row>

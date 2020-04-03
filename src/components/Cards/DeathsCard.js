@@ -37,7 +37,7 @@ function DeathsCard({data}){
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={deathsArray} color={'red'}/>
+          <CardAreaChart data={deathsArray} color={'red'} tooltipAlias='Death'/>
         </Col>
 
       </Row>

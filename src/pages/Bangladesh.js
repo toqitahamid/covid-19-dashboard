@@ -280,13 +280,13 @@ function Bangladesh() {
 
             <Row>
               <Col span={24}>
-                <CardAreaChart data={timelineConfirmed} color={'orange'}/>
+                <CardAreaChart data={timelineConfirmed} color={'orange'} tooltipAlias='Confirmed'/>
               </Col>
 
             </Row>
 
 
-            <Divider ></Divider>
+            <Divider  />
 
             <Row>
               <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
@@ -348,13 +348,13 @@ function Bangladesh() {
 
             <Row>
               <Col span={24}>
-                <CardAreaChart data={timelineActive} color={'grey'}/>
+                <CardAreaChart data={timelineActive} color={'grey'} tooltipAlias='Active'/>
               </Col>
 
             </Row>
 
 
-            <Divider></Divider>
+            <Divider />
 
             <Row>
               <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
@@ -425,12 +425,12 @@ function Bangladesh() {
 
             <Row>
               <Col span={24}>
-                <CardAreaChart data={timelineRecovered} color={'green'}/>
+                <CardAreaChart data={timelineRecovered} color={'green'} tooltipAlias='Recovered'/>
               </Col>
 
             </Row>
 
-            <Divider></Divider>
+            <Divider />
 
             <Row>
               <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
@@ -505,12 +505,12 @@ function Bangladesh() {
 
             <Row>
               <Col span={24}>
-                <CardAreaChart data={timelineDeaths} color={'red'}/>
+                <CardAreaChart data={timelineDeaths} color={'red'} tooltipAlias='Death'/>
               </Col>
 
             </Row>
 
-            <Divider></Divider>
+            <Divider />
 
             <Row>
               <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
