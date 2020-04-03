@@ -3,7 +3,7 @@ import React from "react";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
 const { Text } = Typography;
 
-function ConfirmedCard({data}) {
+function ConfirmedCard({data, reportTitle, reportDate}) {
 
   const {latestConfirmed, confirmedArray, todayConfirmed, yesterdayConfirmed, lastThreeDayConfirmed, lastSevenDayConfirmed, lastThirtyDayConfirmed} = data;
 
@@ -14,15 +14,15 @@ function ConfirmedCard({data}) {
           <Statistic
             title="Infected"
             value={latestConfirmed}
-            valueStyle={{ color: 'orange', fontSize: 28 }}
+            valueStyle={{ color: 'orange', fontSize: 20 }}
           />
         </Col>
 
         <Col span={12}>
           <Statistic
-            title="First Reported"
-            value="NOV 2019"
-            valueStyle={{ color: 'orange', fontSize: 28 }}
+            title={reportTitle}
+            value={reportDate}
+            valueStyle={{ color: 'orange', fontSize: 20 }}
           />
         </Col>
       </Row>

@@ -15,7 +15,7 @@ function ActiveCard({data}) {
             <Statistic
               title="Active"
               value={latestActive}
-              valueStyle={{ color: 'grey', fontSize: 28 }}
+              valueStyle={{ color: 'grey', fontSize: 20 }}
             />
           </div>
         </Col>
@@ -23,7 +23,7 @@ function ActiveCard({data}) {
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={activeArray} color={'grey'} tooltipAlias='Active'/>
+          <CardAreaChart data={activeArray} color="grey" tooltipAlias='Active'/>
         </Col>
 
       </Row>

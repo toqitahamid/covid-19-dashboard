@@ -231,11 +231,21 @@ function getLastThreeDaysData(confirmedArray, recoveredArray, deathsArray, activ
   // If todays data is not uploaded by JHU
   if (todayDate > arrayLastDate){
 
-    const arraySize = confirmedArray.length - 1 ;
-    const startIndex = confirmedArray.length - 3 ;
+    const arraySize = confirmedArray.length ;
+    let startIndex = 0;
+
+    if (arraySize <= 3){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 3 ;
+    }
+
+    // const arraySize = confirmedArray.length - 1 ;
+    // const startIndex = confirmedArray.length - 3 ;
 
     // eslint-disable-next-line no-plusplus
-    for (let x = startIndex; x <= arraySize; x++)   {
+    for (let x = startIndex; x < arraySize; x++)   {
       tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
       tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
       tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
@@ -251,11 +261,21 @@ function getLastThreeDaysData(confirmedArray, recoveredArray, deathsArray, activ
   // todays data is uploaded by JHU
   else {
 
-    const arraySize = confirmedArray.length - 2 ;
-    const startIndex = confirmedArray.length - 4 ;
+    const arraySize = confirmedArray.length;
+    let startIndex = 0;
+
+    if (arraySize <= 4){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 4 ;
+    }
+
+    // const arraySize = confirmedArray.length - 2 ;
+    // const startIndex = confirmedArray.length - 4 ;
 
     // eslint-disable-next-line no-plusplus
-    for (let x = startIndex; x <= arraySize; x++)   {
+    for (let x = startIndex; x < arraySize; x++)   {
       tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
       tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
       tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
@@ -296,11 +316,22 @@ function getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activ
   // If todays data is not uploaded by JHU
   if (todayDate > arrayLastDate){
 
-    const arraySize = confirmedArray.length - 1 ;
-    const startIndex = confirmedArray.length - 7 ;
+    const arraySize = confirmedArray.length ;
+    let startIndex = 0;
+
+    if (arraySize <= 7){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 7 ;
+    }
+
+
+    // const arraySize = confirmedArray.length - 1 ;
+    // const startIndex = confirmedArray.length - 7 ;
 
     // eslint-disable-next-line no-plusplus
-    for (let x = startIndex; x <= arraySize; x++)   {
+    for (let x = startIndex; x < arraySize; x++)   {
       tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
       tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
       tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
@@ -316,11 +347,21 @@ function getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activ
   // todays data is uploaded by JHU
   else {
 
-    const arraySize = confirmedArray.length - 2 ;
-    const startIndex = confirmedArray.length - 8 ;
+    const arraySize = confirmedArray.length;
+    let startIndex = 0;
+
+    if (arraySize <= 8){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 8 ;
+    }
+
+    // const arraySize = confirmedArray.length - 2 ;
+    // const startIndex = confirmedArray.length - 8 ;
 
     // eslint-disable-next-line no-plusplus
-    for (let x = startIndex; x <= arraySize; x++)   {
+    for (let x = startIndex; x < arraySize; x++)   {
       tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
       tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
       tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
@@ -344,6 +385,7 @@ function getLastSevenDaysData(confirmedArray, recoveredArray, deathsArray, activ
 }
 
 function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, activeArray) {
+
   const todayDate = new Date();
   const arrayLastDate = new Date(confirmedArray[confirmedArray.length - 1].Date);
 
@@ -363,11 +405,20 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
   // If todays data is not uploaded by JHU
   if (todayDate > arrayLastDate){
 
-    const arraySize = confirmedArray.length - 1 ;
-    const startIndex = confirmedArray.length - 30 ;
+    const arraySize = confirmedArray.length ;
+    let startIndex = 0;
+
+    if (arraySize <= 30){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 30 ;
+    }
+
 
     // eslint-disable-next-line no-plusplus
-    for (let x = startIndex; x < arraySize; x++)   {
+    for (let x = startIndex; x < arraySize; x++){
+      // console.log(confirmedArray[x].Date);
       tempConfirmedData = Math.abs(confirmedArray[x].value - confirmedArray[x-1].value);
       tempRecoveredData = Math.abs(recoveredArray[x].value - recoveredArray[x-1].value);
       tempDeathsData = Math.abs(deathsArray[x].value - deathsArray[x-1].value);
@@ -383,8 +434,17 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
   // todays data is uploaded by JHU
   else {
 
-    const arraySize = confirmedArray.length - 2 ;
-    const startIndex = confirmedArray.length - 31 ;
+    const arraySize = confirmedArray.length;
+    let startIndex = 0;
+
+    if (arraySize <= 31){
+      startIndex = 1 ;
+    }
+    else {
+      startIndex = confirmedArray.length - 31 ;
+    }
+
+
 
     // eslint-disable-next-line no-plusplus
     for (let x = startIndex; x < arraySize; x++)   {
@@ -411,5 +471,27 @@ function getLastThirtyDaysData(confirmedArray, recoveredArray, deathsArray, acti
 }
 
 
+function getFirstConfirmedDate(data){
+  for (let x=0; x <= data.length -1; x++){
+    if (data[x].value > 0){
+      return data[x].Date;
+    }
+  }
+}
+
+function filterDataByFirstCase(array, date) {
+
+  const filterTime = new Date(date).getTime();
+
+  const timelineConfirmed = array.filter(function (data) {
+    const itemTime = new Date(data.Date).getTime();
+    return itemTime >= filterTime ;
+  });
+
+  return timelineConfirmed;
+}
+
+
+
 export {getLatestData, getDatewiseData, getTodayData, getYesterdayData, getLastThreeDaysData,
-  getLastSevenDaysData, getLastThirtyDaysData, getLatestGlobalData, getDailyCaseData};
+  getLastSevenDaysData, getLastThirtyDaysData, getLatestGlobalData, getDailyCaseData, getFirstConfirmedDate, filterDataByFirstCase};

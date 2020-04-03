@@ -4,7 +4,7 @@ import {PageHeaderWrapper} from "@ant-design/pro-layout";
 import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import {
   getDailyCaseData,
-  getDatewiseData,
+  getDatewiseData, getFirstConfirmedDate,
   getLastSevenDaysData, getLastThirtyDaysData, getLastThreeDaysData,
   getLatestData, getLatestGlobalData,
   getTodayData,
@@ -16,6 +16,10 @@ import DeathsCard from "@/components/Cards/DeathsCard";
 import GlobalTableCard from "@/components/Cards/GlobalTableCard";
 import GlobalDailyCard from "@/components/Cards/GlobalDailyCard";
 import useStats from "../utils/useStats";
+import moment from 'moment';
+import 'moment/locale/en-gb'
+
+moment.locale('en-gb');
 
 const responsiveGutter = [{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}];
 
@@ -26,6 +30,7 @@ function GlobalDashboard() {
 
   const globalDatewiseCountUrl = 'https://covidapi.info/api/v1/global/count';
   const {stats: globalDatewiseCountData, loading: globalDatewiseCountLoading, error: globalDatewiseCountError} = useStats(globalDatewiseCountUrl);
+
   const globalLatestDataCountUrl = 'https://covidapi.info/api/v1/global/latest';
   const {stats: globalLatestDataCount, loading: globalLatestDataCountLoading, error: globalLatestDataCountError} = useStats(globalLatestDataCountUrl);
 
@@ -35,14 +40,18 @@ function GlobalDashboard() {
   if (latestError || globalDatewiseCountError || globalLatestDataCountError) return <Empty/>;
 
 
+  // data for country table
   const globalLatestDataTotal =  getLatestGlobalData(globalLatestDataCount);
 
+  // current data
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
 
+  // historical timeline
   const {confirmed: confirmedTotalArray, recovered: recoveredTotalArray, deaths: deathsTotalArray, active: activeTotalArray} = getDatewiseData(globalDatewiseCountData);
 
   const dailyTotalCaseData = {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray};
 
+  // calculate daily case from historical timeine
   const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = getDailyCaseData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
   // const dailyCaseData = [...confirmedDailyArray, ...recoveredDailyArray, ...deathsDailyArray];
@@ -50,6 +59,10 @@ function GlobalDashboard() {
   const dailyCaseData = {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray};
 
   // console.log(dailyCaseData);
+
+  const firstConfirmedDate = getFirstConfirmedDate(confirmedTotalArray);
+  const  firstReported = moment(firstConfirmedDate).format('ll');
+
 
 
 
@@ -85,7 +98,7 @@ function GlobalDashboard() {
       <Row type='flex' gutter={responsiveGutter}>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
-          <ConfirmedCard data={confirmedCardData}/>
+          <ConfirmedCard data={confirmedCardData} reportTitle='First Reported' reportDate={firstReported}/>
         </Col>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>

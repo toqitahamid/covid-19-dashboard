@@ -19,7 +19,7 @@ function RecoveredCard({data}) {
             <Statistic
               title="Recovered"
               value={latestRecovered}
-              valueStyle={{ color: 'green', fontSize: 28 }}
+              valueStyle={{ color: 'green', fontSize: 20 }}
             />
           </div>
         </Col>
@@ -29,7 +29,7 @@ function RecoveredCard({data}) {
             <Statistic
               title="Recoverey Rate"
               value={`${(recoveryRate).toFixed(2)} %`}
-              valueStyle={{ color: 'green', fontSize: 28 }}
+              valueStyle={{ color: 'green', fontSize: 20 }}
             />
           </div>
         </Col>

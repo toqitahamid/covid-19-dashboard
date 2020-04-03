@@ -6,13 +6,13 @@ import GlobalScatterChart from "@/components/Graph/GlobalScatterChart";
 import GlobalBubbleChart from "@/components/Graph/GlobalBubbleChart";
 import GlobalColumnChart from "@/components/Graph/GlobalColumnChart";
 
+
 const responsiveGutter = [{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}];
 
 function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
 
   const {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray} = dailyTotalCaseData;
-const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deathsTotalArray, ...activeTotalArray];
-
+  const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deathsTotalArray, ...activeTotalArray];
 
   const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = dailyCaseData;
   const dailyCaseMerged = [...confirmedDailyArray, ...recoveredDailyArray, ...deathsDailyArray];
@@ -110,6 +110,11 @@ const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deat
           <GlobalColumnChart  data={deathsDailyArray} title="Daily deaths (worldwide)" label_title='Daily Deaths' legend_visible={false} chart_color='red'/>
         </Card>
       </Col>
+
+
+
+
+
 
 
 

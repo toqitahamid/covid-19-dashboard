@@ -18,7 +18,7 @@ function DeathsCard({data}){
             <Statistic
               title="Deaths"
               value={latestDeaths}
-              valueStyle={{ color: 'red', fontSize: 28 }}
+              valueStyle={{ color: 'red', fontSize: 20 }}
             />
           </div>
         </Col>
@@ -28,7 +28,7 @@ function DeathsCard({data}){
             <Statistic
               title="Death Rate"
               value={`${deathRate.toFixed(2)} %`}
-              valueStyle={{ color: 'red', fontSize: 28 }}
+              valueStyle={{ color: 'red', fontSize: 20 }}
             />
           </div>
         </Col>
@@ -37,7 +37,7 @@ function DeathsCard({data}){
 
       <Row>
         <Col span={24}>
-          <CardAreaChart data={deathsArray} color={'red'} tooltipAlias='Death'/>
+          <CardAreaChart data={deathsArray} color="red" tooltipAlias='Death'/>
         </Col>
 
       </Row>
