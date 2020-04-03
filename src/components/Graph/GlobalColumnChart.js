@@ -26,19 +26,23 @@ function GlobalColumnChart({data, title, legend_visible, chart_color}) {
       xField: 'Date',
       yField: 'value',
       meta: {
-        // Date: {
-        //   // alias: 'Date',
-        // },
+        Date: {
+          type: 'timeCat',
+          // alias: 'Date',
+        },
         value: {
+          type: 'linear',
           // alias: 'Deaths',
           formatter:(v)=>{return abbreviateNumber(v)},
         },
       },
       xAxis: {
+        // type: 'dateTime',
         title: {
           visible: false,
         },
         label: {
+          // type: 'dateTime',
           position: 'top',
           offsetX: 6,
           offsetY: 6,
@@ -85,26 +89,36 @@ function GlobalColumnChart({data, title, legend_visible, chart_color}) {
           visible: false,
         },
       },
-      color: chart_color,
+      colorField:'type',
+      // color: chart_color,
 
 
-      // color: (d) => {
-      //   if (d === 'Confirmed'){
-      //     return 'orange';
-      //   }
-      //   if (d === 'Recovered'){
-      //     return 'green';
-      //   }
-      //   if (d === 'Death'){
-      //     return 'red';
-      //   }
-      //   if (d === 'Active'){
-      //     return 'grey';
-      //   }
-      //   //
-      //   // return d === 'register' ? '#93D072' : '#2D71E7';
-      // },
+      color: (d) => {
+        if (d === 'Confirmed'){
+          return 'orange';
+        }
+        if (d === 'Recovered'){
+          return 'green';
+        }
+        if (d === 'Death'){
+          return 'red';
+        }
+        if (d === 'Active'){
+          return 'grey';
+        }
+        //
+        // return d === 'register' ? '#93D072' : '#2D71E7';
+      },
       responsive: true,
+      legend: {
+        visible: legend_visible,
+        position: 'top-left',
+        style: legend_visible
+          ? {
+            paddingBottom: '10px',
+          }
+          : false,
+      },
 
 
 
@@ -113,7 +127,7 @@ function GlobalColumnChart({data, title, legend_visible, chart_color}) {
         {
           type: 'slider',
           cfg : {
-            start: 0.8,
+            start: 0.7,
             end: 1,
             minLimit: 0,
             maxLimit: 1,
@@ -141,27 +155,8 @@ function GlobalColumnChart({data, title, legend_visible, chart_color}) {
         },
 
       ],
-
-
-
     });
 
-    //   color: (d) => {
-    //     if (d === 'Confirmed'){
-    //       return 'orange';
-    //     }
-    //     if (d === 'Recovered'){
-    //       return 'green';
-    //     }
-    //     if (d === 'Death'){
-    //       return 'red';
-    //     }
-    //     if (d === 'Active'){
-    //       return 'grey';
-    //     }
-    //     //
-    //     // return d === 'register' ? '#93D072' : '#2D71E7';
-    //   },
 
     //
     //   legend: {

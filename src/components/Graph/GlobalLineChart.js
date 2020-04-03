@@ -17,19 +17,28 @@ function GlobalLineChart({data, title, legend_visible}) {
         visible: true,
         text: title,
       },
-      padding: legend_visible ? [60, 10, 30, 40] : [30, 10, 30, 40],
+      padding: legend_visible ? [60, 15, 50, 40] : [30, 15, 50, 40],
 
       // forceFit: true,
       data,
       meta: {
+        // Date: {
+        //   type: 'cat',
+        // },
         value: {
+          // type: 'linear',
           formatter:(v)=>{return abbreviateNumber(v)}
-        }
+        },
+        // type: {
+        //   type: 'cat',
+        // }
+
       },
       xField: 'Date',
       yField: 'value',
       seriesField: 'type',
       // color: ['#6897a7', '#8bc0d6', '#60d7a7', '#dedede', '#fedca9', '#fab36f', '#d96d6f'],
+      colorField:'type',
       color: (d) => {
         if (d === 'Confirmed'){
           return 'orange';
@@ -49,11 +58,22 @@ function GlobalLineChart({data, title, legend_visible}) {
       responsive: true,
 
       xAxis: {
-        // type: 'dateTime',
-        // mask: 'DD-MM-YYYY',
+        type: 'dateTime',
+        mask: 'DD-MM-YYYY',
         // nice: true,
+        tickCount: 21,
+        subTickCount: 6,
+        // tickLine: {
+        //   visible: true,
+        //   length: 5,
+        // },
+
         label: {
-          // 数值格式化为千分位
+          type: 'dateTime',
+          visible: true,
+          autoRotate: false,
+          // autoHide: true
+
           formatter: (v) => {
             const dataString = new Date(v);
             const date = dataString.getDate();
@@ -78,11 +98,8 @@ function GlobalLineChart({data, title, legend_visible}) {
 
             return formattedDate;
           },
-
-          visible: true,
-          autoRotate: false,
-          // autoHide: true
         },
+
       },
       yAxis: {
         nice: true,
@@ -96,6 +113,8 @@ function GlobalLineChart({data, title, legend_visible}) {
         }
         : false,
       },
+
+
 
 
 
