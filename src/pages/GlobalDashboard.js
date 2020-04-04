@@ -51,7 +51,7 @@ function GlobalDashboard() {
 
   const dailyTotalCaseData = {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray};
 
-  // calculate daily case from historical timeine
+  // calculate daily case from historical timeline
   const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = getDailyCaseData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
   // const dailyCaseData = [...confirmedDailyArray, ...recoveredDailyArray, ...deathsDailyArray];

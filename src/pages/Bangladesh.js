@@ -6,7 +6,13 @@ import {
   getDatewiseData,
   getFirstConfirmedDate,
   filterDataByFirstCase,
-  getLatestData, getTodayData, getYesterdayData, getLastThreeDaysData, getLastSevenDaysData, getLastThirtyDaysData
+  getLatestData,
+  getTodayData,
+  getYesterdayData,
+  getLastThreeDaysData,
+  getLastSevenDaysData,
+  getLastThirtyDaysData,
+  getDailyCaseData
 } from "@/utils/globalDataParser/getData";
 import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import ActiveCard from "@/components/Cards/ActiveCard";
@@ -15,6 +21,7 @@ import DeathsCard from "@/components/Cards/DeathsCard";
 
 import moment from 'moment';
 import 'moment/locale/en-gb'
+import GlobalDailyCard from "@/components/Cards/GlobalDailyCard";
 
 moment.locale('en-gb');
 const responsiveGutter = [{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}];
@@ -35,16 +42,17 @@ function Bangladesh() {
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
 
   let {confirmed: confirmedTotalArray, recovered: recoveredTotalArray, deaths: deathsTotalArray, active: activeTotalArray} = getDatewiseData(globalDatewiseCountData);
-
   // get the first confirmed day
   const firstConfirmedDate = getFirstConfirmedDate(confirmedTotalArray);
   const  firstReported = moment(firstConfirmedDate).format('ll');
 
+  // filter array from first reporting case
   confirmedTotalArray = filterDataByFirstCase(confirmedTotalArray, firstConfirmedDate);
   recoveredTotalArray = filterDataByFirstCase(recoveredTotalArray, firstConfirmedDate);
   deathsTotalArray = filterDataByFirstCase(deathsTotalArray, firstConfirmedDate);
   activeTotalArray = filterDataByFirstCase(activeTotalArray, firstConfirmedDate);
 
+  const dailyTotalCaseData = {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray};
 
   const { todayConfirmed, todayRecovered, todayDeaths, todayActive} =
     getTodayData(latestConfirmed, latestRecovered, latestDeaths, latestActive, confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
@@ -74,6 +82,10 @@ function Bangladesh() {
     {latestDeaths, latestConfirmed, deathsArray: deathsTotalArray, todayDeaths, yesterdayDeaths, lastThreeDayDeaths, lastSevenDayDeaths, lastThirtyDayDeaths};
 
 
+  // calculate daily case from historical timeline
+  const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = getDailyCaseData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
+  const dailyCaseData = {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray};
+
 
 
   return (
@@ -94,6 +106,14 @@ function Bangladesh() {
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
           <DeathsCard data={deathsCardData}/>
+        </Col>
+      </Row>
+
+
+
+      <Row type='flex' gutter={responsiveGutter}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+          <GlobalDailyCard dailyTotalCaseData={dailyTotalCaseData} dailyCaseData={dailyCaseData}/>
         </Col>
       </Row>
 
