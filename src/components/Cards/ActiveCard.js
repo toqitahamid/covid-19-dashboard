@@ -1,6 +1,7 @@
 import {Card, Col, Divider, Row, Statistic, Typography} from "antd";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
 import React from "react";
+import numeral from "numeral";
 
 const { Text } = Typography;
 
@@ -33,38 +34,38 @@ function ActiveCard({data}) {
 
       <Row>
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Today</Text>
+          <Text style={{fontSize: 12}}>Today</Text>
         </Col>
-        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{todayActive}</Text>
-        </Col>
-
-        <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Yesterday</Text>
-        </Col>
-        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{yesterdayActive}</Text>
+        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4} >
+          <Text style={{fontSize: 12}}>{numeral(todayActive).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 3 Days</Text>
+          <Text style={{fontSize: 12}}>Yesterday</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThreeDayActive}</Text>
+          <Text style={{fontSize: 12}}>{numeral(yesterdayActive).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 7 Days</Text>
+          <Text style={{fontSize: 12}}>Last 3 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastSevenDayActive}</Text>
+          <Text style={{fontSize: 12}}>{numeral(lastThreeDayActive).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 30 Days</Text>
+          <Text style={{fontSize: 12}}>Last 7 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThirtyDayActive}</Text>
+          <Text style={{fontSize: 12}}>{numeral(lastSevenDayActive).format('0,0')}</Text>
+        </Col>
+
+        <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
+          <Text style={{fontSize: 12}}>Last 30 Days</Text>
+        </Col>
+        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+          <Text style={{fontSize: 12}}>{numeral(lastThirtyDayActive).format('0,0')}</Text>
         </Col>
 
       </Row>

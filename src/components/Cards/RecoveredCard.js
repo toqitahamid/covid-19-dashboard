@@ -1,6 +1,7 @@
 import {Card, Col, Divider, Row, Statistic, Typography} from "antd";
 import React from "react";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
+import numeral from 'numeral';
 
 const { Text } = Typography;
 
@@ -46,38 +47,38 @@ function RecoveredCard({data}) {
 
       <Row>
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Today</Text>
+          <Text  style={{fontSize: 12}}>Today</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{todayRecovered}</Text>
+          <Text  style={{fontSize: 12}}>{numeral(todayRecovered).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Yesterday</Text>
+          <Text  style={{fontSize: 12}}>Yesterday</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{yesterdayRecovered}</Text>
+          <Text  style={{fontSize: 12}}>{numeral(yesterdayRecovered).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 3 Days</Text>
+          <Text  style={{fontSize: 12}}>Last 3 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThreeDayRecovered}</Text>
+          <Text  style={{fontSize: 12}}>{numeral(lastThreeDayRecovered).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 7 Days</Text>
+          <Text  style={{fontSize: 12}}>Last 7 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastSevenDayRecovered}</Text>
+          <Text  style={{fontSize: 12}}>{numeral(lastSevenDayRecovered).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 30 Days</Text>
+          <Text  style={{fontSize: 12}}>Last 30 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThirtyDayRecovered}</Text>
+          <Text  style={{fontSize: 12}}>{numeral(lastThirtyDayRecovered).format('0,0')}</Text>
         </Col>
 
       </Row>

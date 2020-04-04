@@ -1,6 +1,8 @@
 import {Card, Col, Divider, Row, Statistic, Typography} from "antd";
 import React from "react";
 import CardAreaChart from "@/components/Graph/CardAreaChart";
+import numeral from "numeral";
+
 const { Text } = Typography;
 
 function ConfirmedCard({data, reportTitle, reportDate}) {
@@ -39,39 +41,39 @@ function ConfirmedCard({data, reportTitle, reportDate}) {
 
       <Row>
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Today </Text>
+          <Text style={{fontSize: 12}}>Today </Text>
         </Col>
 
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{todayConfirmed}</Text>
-        </Col>
-
-        <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Yesterday</Text>
-        </Col>
-        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{yesterdayConfirmed}</Text>
+          <Text style={{fontSize: 12}}>{numeral(todayConfirmed).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 3 Days</Text>
+          <Text style={{fontSize: 12}}>Yesterday</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThreeDayConfirmed}</Text>
+          <Text style={{fontSize: 12}}>{numeral(yesterdayConfirmed).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 7 Days</Text>
+          <Text style={{fontSize: 12}}>Last 3 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastSevenDayConfirmed}</Text>
+          <Text style={{fontSize: 12}}>{numeral(lastThreeDayConfirmed).format('0,0')}</Text>
         </Col>
 
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text strong style={{fontSize: 14}}>Last 30 Days</Text>
+          <Text style={{fontSize: 12}}>Last 7 Days</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-          <Text strong style={{fontSize: 14}}>{lastThirtyDayConfirmed}</Text>
+          <Text style={{fontSize: 12}}>{numeral(lastSevenDayConfirmed).format('0,0')}</Text>
+        </Col>
+
+        <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
+          <Text style={{fontSize: 12}}>Last 30 Days</Text>
+        </Col>
+        <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+          <Text style={{fontSize: 12}}>{numeral(lastThirtyDayConfirmed).format('0,0')}</Text>
         </Col>
 
       </Row>

@@ -1,16 +1,18 @@
-import {Card, Divider, Table, Typography} from 'antd';
+import {Card, Table, Typography} from 'antd';
 import React from "react";
 import ReactCountryFlag from "react-country-flag"
+import numeral from "numeral";
 
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 
 function GlobalTableCard({data}) {
 
   data.sort(function (a, b) {
     return (b.confirmed - a.confirmed);
 
-  })
+  });
+
   // countries.getAlpha2Code('United States of America', 'en'))
   const columns = [
     {
@@ -31,7 +33,6 @@ function GlobalTableCard({data}) {
       ellipsis: true,
       fixed: 'left',
       textWrap: 'word-break',
-
     },
     {
       title: 'Confirmed',
@@ -40,7 +41,8 @@ function GlobalTableCard({data}) {
       // sorter: (a, b) => a.confirmed - b.confirmed,
       // sortDirections: ['descend', 'ascend'],
       // sortOrder: 'descend',
-      align: 'right'
+      align: 'right',
+      render:  dataFormat => numeral(dataFormat).format('0,0'),
     },
     {
       title: 'Recovered',
@@ -48,7 +50,8 @@ function GlobalTableCard({data}) {
       // sorter: (a, b) => a.recovered - b.recovered,
       // sortDirections: ['descend', 'ascend'],
       key: 'key',
-      align: 'right'
+      align: 'right',
+      render:  dataFormat => numeral(dataFormat).format('0,0'),
     },
     {
       title: 'Deaths',
@@ -56,7 +59,8 @@ function GlobalTableCard({data}) {
       key: 'key',
       // sorter: (a, b) => a.deaths - b.deaths,
       // sortDirections: ['descend', 'ascend'],
-      align: 'right'
+      align: 'right',
+      render:  dataFormat => numeral(dataFormat).format('0,0'),
     },
 
   ];

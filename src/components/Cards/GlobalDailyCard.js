@@ -12,7 +12,7 @@ function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
   const {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray} = dailyTotalCaseData;
   const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deathsTotalArray, ...activeTotalArray];
 
-  console.log(dataTotalMerged);
+  // console.log(dataTotalMerged);
 
   const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = dailyCaseData;
   const dailyCaseMerged = [...confirmedDailyArray, ...recoveredDailyArray, ...deathsDailyArray];
