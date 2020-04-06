@@ -16,7 +16,7 @@ function GlobalTableCard({data}) {
   // countries.getAlpha2Code('United States of America', 'en'))
   const columns = [
     {
-      dataIndex: 'country_code',
+      dataIndex: 'iso2',
       key: 'key',
       width: 25,
       colSpan: 0,
