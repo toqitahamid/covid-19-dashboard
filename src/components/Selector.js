@@ -41,7 +41,7 @@ function Selector({iso3}) {
 
 
 
-   if (latestLoading || globalDatewiseCountLoading) return <Card active='true' loading='true'/>;
+  if (latestLoading || globalDatewiseCountLoading) return <Card active='true' loading='true'/>;
   if (!latestData || !globalDatewiseCountData ) return <Card active='true' loading='true'/>;
   if (latestError || globalDatewiseCountError ) return <Empty/>;
 

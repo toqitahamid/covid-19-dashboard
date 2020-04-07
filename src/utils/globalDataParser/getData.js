@@ -159,11 +159,11 @@ function getTodayData(latestConfirmed, latestRecovered, latestDeaths, latestActi
 
 
   if (todayDate > arrayLastDate){
-    console.log(`Latest Confirmed: ${latestConfirmed} - Confirmed: ${confirmedArray[confirmedArray.length - 1].value} = today confirmed = ${todayConfirmed} `);
     todayConfirmed = latestConfirmed - confirmedArray[confirmedArray.length - 1].value;
     todayRecovered = latestRecovered - recoveredArray[recoveredArray.length - 1].value;
     todayDeaths = latestDeaths - deathsArray[deathsArray.length - 1].value;
     todayActive = latestActive - activeArray[activeArray.length - 1].value;
+    console.log(`Latest Confirmed: ${latestConfirmed} - Confirmed: ${confirmedArray[confirmedArray.length - 1].value} = today confirmed = ${todayConfirmed} `);
   }
   else {
     console.log('no')

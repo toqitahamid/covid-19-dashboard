@@ -43,7 +43,12 @@ function CardAreaChart({data, color, tooltipAlias}) {
 
 
   return (
-    <AreaChart {...AreaConfig} />
+
+      <div style={{margin: '-28px -25px' }}>
+        <AreaChart {...AreaConfig} />
+      </div>
+
+
   )
 
 

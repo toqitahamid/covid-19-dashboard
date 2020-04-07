@@ -30,9 +30,9 @@ function CountrySelector() {
   const [selectedCountry, setSelectedCountry] = useState('BGD');
 
 
-  if ( globalLatestDataCountLoading) return <Card active='true' loading='true'/>;
+  if (globalLatestDataCountLoading) return <Card active='true' loading='true'/>;
   if (!globalLatestDataCount) return <Card active='true' loading='true'/>;
-  if (  globalLatestDataCountError) return <Empty/>;
+  if (globalLatestDataCountError) return <Empty/>;
 
   // data for country table
   const globalLatestDataTotalSorted =  getLatestGlobalData(globalLatestDataCount);
