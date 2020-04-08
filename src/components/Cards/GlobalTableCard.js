@@ -68,7 +68,7 @@ function GlobalTableCard({data}) {
   return(
 
     <Card>
-      <Title level={4}>Statistics</Title>
+      <Title level={4}>CASES BY REGION</Title>
       <Table dataSource={data} columns={columns} size="small" scroll={{ x: 500, y: 500 }}  tableLayout="fixed" pagination={false}/>
     </Card>
 
