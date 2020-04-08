@@ -20,7 +20,7 @@ function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
 
   const {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray} = dailyTotalCaseData;
   const dataTotalMerged = [...confirmedTotalArray, ...recoveredTotalArray, ...deathsTotalArray, ...activeTotalArray];
-  console.log(`Last item: ${confirmedTotalArray[confirmedTotalArray.length-1].value}`);
+  // console.log(`Last item: ${confirmedTotalArray[confirmedTotalArray.length-1].value}`);
 
   const {confirmedDailyArray, recoveredDailyArray, deathsDailyArray, activeDailyArray} = dailyCaseData;
   const dailyCaseMerged = [...confirmedDailyArray, ...recoveredDailyArray, ...deathsDailyArray];
@@ -38,8 +38,7 @@ function GlobalDailyCard ({dailyTotalCaseData, dailyCaseData}){
         </Card>
       </Col>}
 
-      {confirmedDailyArray.length > 2 && <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-        <Card>
+      {confirmedDailyArray.length > 2 && <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}><Card>
           <GlobalLineChart data={dailyCaseMerged} title="Daily cases" legend_visible/>
         </Card>
       </Col>}
