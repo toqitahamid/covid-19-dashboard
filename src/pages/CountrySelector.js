@@ -42,7 +42,7 @@ function CountrySelector() {
 
   function handleChange(e) {
     setSelectedCountry(countries.getAlpha3Code(e, 'en'));
-    console.log(`selected ${e}`);
+    // console.log(`selected ${e}`);
   }
 
 
