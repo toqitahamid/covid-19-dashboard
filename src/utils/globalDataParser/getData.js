@@ -58,8 +58,6 @@ function getLatestData(data) {
   const deaths = data.deaths.value;
   const active = confirmed - deaths - recovered;
 
-  console.log(confirmed)
-
   return {
     confirmed,
     recovered,
@@ -196,11 +194,9 @@ function getYesterdayData(confirmedArray, recoveredArray, deathsArray, activeArr
   if (todayDate > arrayLastDate){
 
     const arraySize = confirmedArray.length ;
-    console.log(`array size : ${arraySize}`)
-    let startIndex = 0;
+
 
     if (arraySize > 1){
-      startIndex = 1 ;
       yesterdayConfirmed = confirmedArray[confirmedArray.length - 1].value - confirmedArray[confirmedArray.length - 2].value;
       yesterdayRecovered = recoveredArray[recoveredArray.length - 1].value - recoveredArray[recoveredArray.length - 2].value;
       yesterdayDeaths = deathsArray[deathsArray.length - 1].value - deathsArray[deathsArray.length - 2].value;
