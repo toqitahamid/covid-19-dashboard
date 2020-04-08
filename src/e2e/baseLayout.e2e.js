@@ -54,6 +54,6 @@ describe('Ant Design Pro E2E test', () => {
   });
 });
 
-// afterAll(() => {
-//   browser.close();
-// });
+afterAll(() => {
+  browser.close();
+});
