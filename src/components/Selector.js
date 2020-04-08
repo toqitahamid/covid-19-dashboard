@@ -29,12 +29,12 @@ const responsiveGutter = [{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 2
 function Selector({iso3}) {
 
   const iso2 = countries.alpha3ToAlpha2(iso3);
-  console.log(iso2);
-  console.log(iso3);
+  // console.log(iso2);
+  // console.log(iso3);
 
   const latestDataUrl = `https://covid19.mathdro.id/api/countries/${iso2}`;
   const {stats: latestData, loading: latestLoading, error: latestError} = useStats(latestDataUrl);
-  // console.log(latestData);
+
 
   const globalDatewiseCountUrl = `https://covidapi.info/api/v1/country/${iso3}`;
   const {stats: globalDatewiseCountData, loading: globalDatewiseCountLoading, error: globalDatewiseCountError} = useStats(globalDatewiseCountUrl);
@@ -44,7 +44,6 @@ function Selector({iso3}) {
   if (latestLoading || globalDatewiseCountLoading) return <Card active='true' loading='true'/>;
   if (!latestData || !globalDatewiseCountData ) return <Card active='true' loading='true'/>;
   if (latestError || globalDatewiseCountError ) return <Empty/>;
-
 
   // current data
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
@@ -64,6 +63,7 @@ function Selector({iso3}) {
   deathsTotalArray = filterDataByFirstCase(deathsTotalArray, firstConfirmedDate);
   activeTotalArray = filterDataByFirstCase(activeTotalArray, firstConfirmedDate);
 
+  // console.log(confirmedTotalArray.length)
 
   const dailyTotalCaseData = {confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray};
 
@@ -89,6 +89,7 @@ function Selector({iso3}) {
   const {lastThirtyDayConfirmed, lastThirtyDayRecovered, lastThirtyDayDeaths, lastThirtyDayActive} =
     getLastThirtyDaysData(confirmedTotalArray, recoveredTotalArray, deathsTotalArray, activeTotalArray);
 
+
   const confirmedCardData =
     {latestConfirmed, confirmedArray: confirmedTotalArray, todayConfirmed, yesterdayConfirmed, lastThreeDayConfirmed, lastSevenDayConfirmed, lastThirtyDayConfirmed};
 
@@ -102,6 +103,7 @@ function Selector({iso3}) {
 
   const deathsCardData =
     {latestDeaths, latestConfirmed, deathsArray: deathsTotalArray, todayDeaths, yesterdayDeaths, lastThreeDayDeaths, lastSevenDayDeaths, lastThirtyDayDeaths};
+
 
   return(
     <div>

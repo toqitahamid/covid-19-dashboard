@@ -16,7 +16,7 @@ function flattenArray(data) {
 
 
 function getLatestGlobalData(data) {
-  //console.log(data);
+  // console.log(data);
   // const latestData = flattenArray(data.result);
   //
   // const tempData = Object.entries(latestData).map(([key, value ]) => ({
@@ -58,6 +58,7 @@ function getLatestData(data) {
   const deaths = data.deaths.value;
   const active = confirmed - deaths - recovered;
 
+  console.log(confirmed)
 
   return {
     confirmed,
@@ -149,7 +150,7 @@ function getTodayData(latestConfirmed, latestRecovered, latestDeaths, latestActi
   const todayDate = new Date();
   const arrayLastDate = new Date(confirmedArray[confirmedArray.length - 1].Date);
 
-  console.log(todayDate);
+  // console.log(todayDate);
 
   let todayConfirmed;
   let todayRecovered;
@@ -163,10 +164,10 @@ function getTodayData(latestConfirmed, latestRecovered, latestDeaths, latestActi
     todayRecovered = latestRecovered - recoveredArray[recoveredArray.length - 1].value;
     todayDeaths = latestDeaths - deathsArray[deathsArray.length - 1].value;
     todayActive = latestActive - activeArray[activeArray.length - 1].value;
-    console.log(`Latest Confirmed: ${latestConfirmed} - Confirmed: ${confirmedArray[confirmedArray.length - 1].value} = today confirmed = ${todayConfirmed} `);
+    // console.log(`Latest Confirmed: ${latestConfirmed} - Confirmed: ${confirmedArray[confirmedArray.length - 1].value} = today confirmed = ${todayConfirmed} `);
   }
   else {
-    console.log('no')
+    // console.log('no')
     todayConfirmed = confirmedArray[confirmedArray.length - 1].value - confirmedArray[confirmedArray.length - 2].value;
     todayRecovered = recoveredArray[recoveredArray.length - 1].value - recoveredArray[recoveredArray.length - 2].value;
     todayDeaths = deathsArray[deathsArray.length - 1].value - deathsArray[deathsArray.length - 2].value;
@@ -195,9 +196,10 @@ function getYesterdayData(confirmedArray, recoveredArray, deathsArray, activeArr
   if (todayDate > arrayLastDate){
 
     const arraySize = confirmedArray.length ;
+    console.log(`array size : ${arraySize}`)
     let startIndex = 0;
 
-    if (arraySize >= 2){
+    if (arraySize > 1){
       startIndex = 1 ;
       yesterdayConfirmed = confirmedArray[confirmedArray.length - 1].value - confirmedArray[confirmedArray.length - 2].value;
       yesterdayRecovered = recoveredArray[recoveredArray.length - 1].value - recoveredArray[recoveredArray.length - 2].value;
@@ -210,9 +212,6 @@ function getYesterdayData(confirmedArray, recoveredArray, deathsArray, activeArr
       yesterdayDeaths = 0;
       yesterdayActive = 0;
     }
-
-
-
   }
 
   else {

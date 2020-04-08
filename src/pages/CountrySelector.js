@@ -36,11 +36,12 @@ function CountrySelector() {
 
   // data for country table
   const globalLatestDataTotalSorted =  getLatestGlobalData(globalLatestDataCount);
+  // console.log(globalLatestDataTotalSorted)
 
 
 
   function handleChange(e) {
-    setSelectedCountry(e);
+    setSelectedCountry(countries.getAlpha3Code(e, 'en'));
     console.log(`selected ${e}`);
   }
 
@@ -55,12 +56,12 @@ function CountrySelector() {
           <Select
             style={{width: 350}}
             showSearch
-            defaultValue='BGD'
+            defaultValue='Bangladesh'
             onChange={handleChange}
           >
             {Object.entries(globalLatestDataTotalSorted).map(([key, value]) => (
-              <Option key={value.iso3 + Math.random()} value={value.iso3}>
-                <CountryFlag iso3={value.iso3} iso2={value.iso2}></CountryFlag>
+              <Option key={value.iso3 + Math.random()} value={value.country}>
+                <CountryFlag iso3={value.iso3} iso2={value.iso2} />
               </Option>
             ))}
 
