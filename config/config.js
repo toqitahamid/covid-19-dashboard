@@ -67,12 +67,12 @@ export default defineConfig({
         //   icon: 'cloud',
         //   component: 'Data',
         // },
-        // {
-        //   path: 'select-country',
-        //   name: 'Select Country',
-        //   icon: 'global',
-        //   component: 'CountrySelector',
-        // },
+        {
+          path: 'select-country',
+          name: 'Select Country',
+          icon: 'global',
+          component: 'CountrySelector',
+        },
         {
           component: './404',
         },

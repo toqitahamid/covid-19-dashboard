@@ -18,6 +18,7 @@ import GlobalDailyCard from "@/components/Cards/GlobalDailyCard";
 import useStats from "../utils/useStats";
 import moment from 'moment';
 import 'moment/locale/en-gb'
+import { Spin } from 'antd';
 
 moment.locale('en-gb');
 
@@ -35,13 +36,13 @@ function GlobalDashboard() {
   const {stats: globalLatestDataCount, loading: globalLatestDataCountLoading, error: globalLatestDataCountError} = useStats(globalLatestDataCountUrl);
 
 
-  if (latestLoading || globalDatewiseCountLoading || globalLatestDataCountLoading) return <Card active='true' loading='true'/>;
+  // if (latestLoading || globalDatewiseCountLoading || globalLatestDataCountLoading) return <Card active='true' loading='true'/>;
   if (!latestData || !globalDatewiseCountData || !globalLatestDataCount) return <Card active='true' loading='true'/>;
   if (latestError || globalDatewiseCountError || globalLatestDataCountError) return <Empty/>;
 
 
   // data for country table
-  const globalLatestDataTotal =  getLatestGlobalData(globalLatestDataCount);
+  const globalLatestDataTotalSorted =  getLatestGlobalData(globalLatestDataCount);
 
   // current data
   const {confirmed: latestConfirmed, recovered: latestRecovered, deaths: latestDeaths, active: latestActive} = getLatestData(latestData);
@@ -121,7 +122,7 @@ function GlobalDashboard() {
 
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
 
-          <GlobalTableCard data={globalLatestDataTotal}/>
+          <GlobalTableCard data={globalLatestDataTotalSorted}/>
         </Col>
 
       </Row>
