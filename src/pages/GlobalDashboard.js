@@ -43,6 +43,7 @@ function GlobalDashboard() {
 
 
   // data for country table
+  console.log(globalLatestDataCount.date);
   const globalLatestDataTotalSorted =  getLatestGlobalData(globalLatestDataCount);
 
   // current data
@@ -130,7 +131,7 @@ function GlobalDashboard() {
 
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
 
-          <GlobalTableCard data={globalLatestDataTotalSorted}/>
+          <GlobalTableCard data={globalLatestDataTotalSorted} lastUpdated={globalLatestDataCount.date}/>
         </Col>
 
       </Row>

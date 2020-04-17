@@ -38,7 +38,9 @@ function getLatestGlobalData(data) {
       country: countries.getName(value, "en"),
       confirmed: id.confirmed,
       deaths: id.deaths,
+      deathRate: id.deaths/id.confirmed,
       recovered: id.recovered,
+      recoveryRate: id.recovered/id.confirmed,
       iso2: countries.alpha3ToAlpha2(value),
       iso3: value,
     }));
