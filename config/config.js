@@ -49,14 +49,14 @@ export default defineConfig({
         {
           path: 'bangladesh',
           name: 'Bangladesh',
-          title: 'Bangladesh Data',
+          // title: 'Bangladesh Data',
           icon: 'area-chart',
           component: 'Bangladesh',
         },
         {
           path: 'global',
           name: 'Global',
-          title: 'Global Data',
+          // title: 'Global Data',
           icon: 'global',
           component: 'GlobalDashboard',
         },
@@ -68,9 +68,9 @@ export default defineConfig({
         //   component: 'Data',
         // },
         {
-          path: 'select-country',
-          name: 'Select Country',
-          icon: 'global',
+          path: 'countries',
+          name: 'Countries',
+          icon: 'block',
           component: 'CountrySelector',
         },
         {

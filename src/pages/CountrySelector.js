@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'moment/locale/en-gb'
 import Selector from "@/components/Selector";
 import CountryFlag from "@/components/Cards/CountryFlag";
+import {Helmet} from "react-helmet";
 
 const countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
@@ -37,6 +38,12 @@ function CountrySelector() {
 
   return (
     <PageHeaderWrapper>
+
+
+      <Helmet>
+        <title>Countries</title>
+        <meta name="description" content="Country-wise coronavirus data" />
+      </Helmet>
 
       <Row type='flex' gutter={responsiveGutter} >
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>

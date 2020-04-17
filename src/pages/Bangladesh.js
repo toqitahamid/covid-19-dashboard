@@ -18,7 +18,7 @@ import ConfirmedCard from "@/components/Cards/ConfirmedCard";
 import ActiveCard from "@/components/Cards/ActiveCard";
 import RecoveredCard from "@/components/Cards/RecoveredCard";
 import DeathsCard from "@/components/Cards/DeathsCard";
-
+import { Helmet } from 'react-helmet';
 import moment from 'moment';
 import 'moment/locale/en-gb'
 import GlobalDailyCard from "@/components/Cards/GlobalDailyCard";
@@ -90,6 +90,13 @@ function Bangladesh() {
 
   return (
     <PageHeaderWrapper>
+
+      <Helmet>
+        <title>Bangladesh Data</title>
+        <meta name="description" content="Tracking the spread of coronavirus (COVID-19) in the Bangladesh with data from Johns Hopkins University and WHO" />
+      </Helmet>
+
+
       <Row type='flex' gutter={responsiveGutter}>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>
