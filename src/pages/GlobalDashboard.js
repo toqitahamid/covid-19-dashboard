@@ -19,6 +19,7 @@ import useStats from "../utils/useStats";
 import moment from 'moment';
 import 'moment/locale/en-gb'
 import { Spin } from 'antd';
+import {Helmet} from "react-helmet";
 
 moment.locale('en-gb');
 
@@ -96,6 +97,13 @@ function GlobalDashboard() {
 
   return (
     <PageHeaderWrapper>
+
+
+      <Helmet>
+        <title>Global Data</title>
+        <meta name="description" content="Global situation of coronavirus pandemic" />
+      </Helmet>
+
       <Row type='flex' gutter={responsiveGutter}>
 
         <Col xs={24} sm={24} md={12} lg={12} xl={6} xxl={6}>

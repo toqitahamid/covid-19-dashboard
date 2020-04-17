@@ -47,7 +47,7 @@ function DeathsCard({data}){
 
       <Row>
         <Col xs={20} sm={20} md={20} lg={20} xl={20} xxl={20}>
-          <Text  style={{fontSize: 12}}>Today</Text>
+          <Text  style={{fontSize: 12}}>Last 24 Hours</Text>
         </Col>
         <Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
           <Text  style={{ fontSize: 12}}>{numeral(todayDeaths).format('0,0')}</Text>
